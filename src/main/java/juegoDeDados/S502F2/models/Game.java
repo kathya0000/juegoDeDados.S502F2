@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
@@ -14,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection= "game")
 public class Game {
     @Id
-    private String Id;
+    private String id;
     private Integer points;
     private String playerId;
 

@@ -38,7 +38,7 @@ public class ServiceGame implements GameService {
         return game;
     }
 
-    @Override
+   /* @Override
     public String deleteGamesByIdPlayer(String id) {
         List<Game> games = gameRepository.findAllByPlayerId(id);
         if (games.isEmpty()) {
@@ -47,7 +47,44 @@ public class ServiceGame implements GameService {
             games.forEach(gameRepository::delete);
             return "Games deleted";
         }
-    }
+    }*/
+  /* @Override
+   public String deleteGamesByIdPlayer(String id) {
+       try {
+           List<Game> games = gameRepository.findAllByPlayerId(id);
+           if (games.isEmpty()) {
+               return "Player with id " + id + " has no games";
+           } else {
+               games.forEach(gameRepository::delete);
+               return "Games deleted";
+           }
+       } catch (Exception e) {
+           // Log the exception
+           e.printStackTrace();
+           return "An error occurred: " + e.getMessage();
+       }
+   }*/
+   @Override
+   public String deleteGamesByIdPlayer(String id) {
+       System.out.println("Deleting games for player id: " + id);
+       List<Game> games = gameRepository.findAllByPlayerId(id);
+       System.out.println("Number of games found: " + games.size());
+       if (games.isEmpty()) {
+           return "Player with id " + id + " has no games";
+       } else {
+           for (Game game : games) {
+               if (game.getId() != null) {
+                   gameRepository.delete(game);
+               } else {
+                   // Aquí puedes manejar el caso cuando el id del juego es nulo
+                   System.out.println("Game with null id found");
+               }
+           }
+           return "Games deleted";
+       }
+   }
+
+
 
 
     @Override
